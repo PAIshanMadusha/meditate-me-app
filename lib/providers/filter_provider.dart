@@ -43,4 +43,6 @@ class FilterProvider extends ChangeNotifier {
     _filteredData = _allData;
     notifyListeners();
   }
+  //Getter
+  List<dynamic> get filterData => _filteredData;
 }
