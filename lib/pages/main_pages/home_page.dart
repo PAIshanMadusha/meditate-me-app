@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
                     border: Border.all(
                       // ignore: deprecated_member_use
                       color: AppColors.kFChipContainerColor2.withOpacity(0.2),
-                      width: 2,
+                      width: 2.5,
                     ),
                     borderRadius: BorderRadius.circular(
                       12,

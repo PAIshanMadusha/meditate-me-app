@@ -2,7 +2,7 @@ class SleepExerciseModel {
   final String category;
   final String name;
   final String description;
-  final String duration;
+  final int duration;
   final String audioUrl;
 
   SleepExerciseModel({
