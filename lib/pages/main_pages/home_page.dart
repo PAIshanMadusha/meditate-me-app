@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                               ),
                               child: Image.asset(
                                 "assets/images/treelogo.jpg",
-                                width: MediaQuery.of(context).size.width * 0.26,
+                                width: MediaQuery.of(context).size.width * 0.28,
                               ),
                             ),
                             SizedBox(
@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
                             ),
                             Text(
                               "MeditateMe",
-                              style: AppTextStyle.mainTitleStyle,
+                              style: AppTextStyle.kMainTitleStyle,
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                         ),
                         Text(
                           "Select a Category to Start Exploring",
-                          style: AppTextStyle.titleStyle,
+                          style: AppTextStyle.kTitleStyle,
                         ),
                         SizedBox(
                           height: AppConstances.kSizedBoxValue,
@@ -87,6 +87,14 @@ class HomePage extends StatelessWidget {
                               12,
                             ),
                             gradient: AppColors.kFChipContainerColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.kFChipContainerColor2,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(1, 1),
+                              ),
+                            ],
                           ),
                           child: Padding(
                             padding: EdgeInsets.only(
@@ -96,38 +104,140 @@ class HomePage extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: [
+                                  //All
                                   FilterChip(
                                     label: Text(
                                       "All",
+                                      style: AppTextStyle.kSmallDescriptionStyle
+                                          .copyWith(
+                                        color:
+                                            filterData.getSelectedCategory() ==
+                                                    "All"
+                                                ? AppColors.kWhiteColor
+                                                : AppColors.kGreyColor,
+                                      ),
                                     ),
-                                    onSelected: (value) {},
+                                    onSelected: (bool value) {
+                                      filterData.filteredData("All");
+                                    },
+                                    selected:
+                                        filterData.getSelectedCategory() ==
+                                            "All",
+                                    selectedColor: AppColors.kLightBlueColor,
+                                    showCheckmark: false,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        8,
+                                      ),
+                                      side: BorderSide(
+                                        color: AppColors.kWhiteColor,
+                                        width: 1,
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
+
+                                  //Mindful
                                   FilterChip(
                                     label: Text(
                                       "Mindfulness",
+                                      style: AppTextStyle.kSmallDescriptionStyle
+                                          .copyWith(
+                                        color:
+                                            filterData.getSelectedCategory() ==
+                                                    "Mindfulness"
+                                                ? AppColors.kWhiteColor
+                                                : AppColors.kGreyColor,
+                                      ),
                                     ),
-                                    onSelected: (value) {},
+                                    onSelected: (bool value) {
+                                      filterData.filteredData("Mindfulness");
+                                    },
+                                    selected:
+                                        filterData.getSelectedCategory() ==
+                                            "Mindfulness",
+                                    selectedColor: AppColors.kLightBlueColor,
+                                    showCheckmark: false,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          8,
+                                        ),
+                                        side: BorderSide(
+                                          color: AppColors.kWhiteColor,
+                                          width: 1,
+                                        )),
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
+
+                                  //Meditation
                                   FilterChip(
                                     label: Text(
                                       "Meditation",
+                                      style: AppTextStyle.kSmallDescriptionStyle
+                                          .copyWith(
+                                        color:
+                                            filterData.getSelectedCategory() ==
+                                                    "Meditation"
+                                                ? AppColors.kWhiteColor
+                                                : AppColors.kGreyColor,
+                                      ),
                                     ),
-                                    onSelected: (value) {},
+                                    onSelected: (bool value) {
+                                      filterData.filteredData("Meditation");
+                                    },
+                                    selected:
+                                        filterData.getSelectedCategory() ==
+                                            "Meditation",
+                                    selectedColor: AppColors.kLightBlueColor,
+                                    showCheckmark: false,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        8,
+                                      ),
+                                      side: BorderSide(
+                                        color: AppColors.kWhiteColor,
+                                        width: 1,
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
+
+                                  //Sleep Stories
                                   FilterChip(
                                     label: Text(
                                       "Sleep Stories",
+                                      style: AppTextStyle.kSmallDescriptionStyle
+                                          .copyWith(
+                                        color:
+                                            filterData.getSelectedCategory() ==
+                                                    "Sleep Stories"
+                                                ? AppColors.kWhiteColor
+                                                : AppColors.kGreyColor,
+                                      ),
                                     ),
-                                    onSelected: (value) {},
+                                    onSelected: (bool value) {
+                                      filterData.filteredData("Sleep Stories");
+                                    },
+                                    selected:
+                                        filterData.getSelectedCategory() ==
+                                            "Sleep Stories",
+                                    selectedColor: AppColors.kLightBlueColor,
+                                    showCheckmark: false,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        8,
+                                      ),
+                                      side: BorderSide(
+                                        color: AppColors.kWhiteColor,
+                                        width: 1,
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -153,11 +263,21 @@ class HomePage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(
                                       15,
                                     ),
-                                    color: data is MindfulExerciseModel
-                                        ? AppColors.kFChipContainerColor2
+                                    gradient: data is MindfulExerciseModel
+                                        ? AppColors.kMindfulCardColor
                                         : data is SleepExerciseModel
-                                            ? AppColors.kMainTitleColor
-                                            : AppColors.kBlueColor,
+                                            ? AppColors.kMeditationCardColor
+                                            : AppColors.kSleepCardColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.kFChipContainerColor2
+                                            // ignore: deprecated_member_use
+                                            .withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 2,
+                                        offset: Offset(2, 2),
+                                      ),
+                                    ],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(
@@ -170,31 +290,36 @@ class HomePage extends StatelessWidget {
                                         Text(
                                           data.name,
                                           style:
-                                              AppTextStyle.titleStyle.copyWith(
-                                            color: AppColors.kWhiteColor,
+                                              AppTextStyle.kTitleStyle.copyWith(
+                                            color: AppColors.kBlackColor
+                                                // ignore: deprecated_member_use
+                                                .withOpacity(0.7),
                                           ),
                                         ),
                                         Text(
                                           data.category,
                                           style:
-                                              AppTextStyle.titleStyle.copyWith(
-                                            color: AppColors.kGreyColor,
+                                              AppTextStyle.kTitleStyle.copyWith(
+                                            color: AppColors.kBlackColor
+                                                // ignore: deprecated_member_use
+                                                .withOpacity(0.35),
                                           ),
                                         ),
                                         Text(
                                           "${data.duration} min",
                                           style:
-                                              AppTextStyle.titleStyle.copyWith(
-                                            color: AppColors.kMainTitleColor,
+                                              AppTextStyle.kTitleStyle.copyWith(
+                                            color: AppColors.kWhiteColor,
                                           ),
                                         ),
                                         Text(
                                           data.description,
-                                          style:
-                                              AppTextStyle.titleStyle.copyWith(
-                                            fontSize: 15,
-                                            color:
-                                                AppColors.kFChipContainerColor1,
+                                          style: AppTextStyle
+                                              .kSmallDescriptionStyle
+                                              .copyWith(
+                                            color: AppColors.kBlackColor
+                                                // ignore: deprecated_member_use
+                                                .withOpacity(0.3),
                                           ),
                                           maxLines:
                                               (data.description.length / 2)
