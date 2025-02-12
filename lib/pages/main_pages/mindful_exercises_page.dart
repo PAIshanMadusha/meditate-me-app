@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meditate_me_app/models/mindful_exercise_model.dart';
 import 'package:meditate_me_app/providers/mindful_exercise_provider.dart';
+import 'package:meditate_me_app/router/route_names.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_constances.dart';
 import 'package:meditate_me_app/utils/app_text_style.dart';
@@ -79,50 +83,63 @@ class MindfulExercisesPage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: mindfulExercises.mindfulExercises.length,
                     itemBuilder: (context, index) {
-                      MindfulExerciseModel mindfulExercise =
+                      MindfulExerciseModel singleMindfulExercise =
                           mindfulExercises.mindfulExercises[index];
 
-                      return Container(
-                        padding: EdgeInsets.all(
-                          AppConstances.kPaddingValue,
-                        ),
-                        margin: EdgeInsets.only(
-                          bottom: AppConstances.kPaddingValue,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            15,
+                      return GestureDetector(
+                        onTap: () {
+                          GoRouter.of(context).pushNamed(
+                            RouteNames.mindfulExerciseSinglePage,
+                            queryParameters: {
+                              "mindfulExercises": jsonEncode(
+                                singleMindfulExercise.toJson(),
+                              ),
+                            },
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(
+                            AppConstances.kPaddingValue,
                           ),
-                          gradient: AppColors.kMindfulCardColor,
-                          boxShadow: [
-                            BoxShadow(
-                                color: AppColors.kMindfulCardColor1,
-                                spreadRadius: 1,
-                                blurRadius: 3,
-                                offset: Offset(1, 1))
-                          ],
-                        ),
-                        child: ListTile(
-                          leading: ClipRRect(
+                          margin: EdgeInsets.only(
+                            bottom: AppConstances.kPaddingValue,
+                          ),
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                              100,
+                              15,
                             ),
-                            child: Image.asset(
-                              mindfulExercise.imagePath,
-                              width: MediaQuery.of(context).size.width * 0.13,
-                              height: MediaQuery.of(context).size.height * 0.6,
-                              fit: BoxFit.cover,
+                            gradient: AppColors.kMindfulCardColor,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: AppColors.kMindfulCardColor1,
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: Offset(1, 1))
+                            ],
+                          ),
+                          child: ListTile(
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                100,
+                              ),
+                              child: Image.asset(
+                                singleMindfulExercise.imagePath,
+                                width: MediaQuery.of(context).size.width * 0.13,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.6,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          title: Text(
-                            mindfulExercise.name,
-                            style: AppTextStyle.kTitleStyle,
-                          ),
-                          subtitle: Text(
-                            mindfulExercise.description,
-                            style: AppTextStyle.kSmallDescriptionStyle,
-                            maxLines: 5,
-                            overflow: TextOverflow.ellipsis,
+                            title: Text(
+                              singleMindfulExercise.name,
+                              style: AppTextStyle.kTitleStyle,
+                            ),
+                            subtitle: Text(
+                              singleMindfulExercise.description,
+                              style: AppTextStyle.kSmallDescriptionStyle,
+                              maxLines: 5,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                       );
