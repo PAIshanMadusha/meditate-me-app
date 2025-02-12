@@ -132,7 +132,7 @@ class MindfulExerciseSinglePage extends StatelessWidget {
                           width: AppConstances.kSizedBoxValue,
                         ),
                         Text(
-                          "${mindfulExercise.duration.toString()} min",
+                          "${mindfulExercise.duration.toString()} Min",
                           style: AppTextStyle.kTitleStyle,
                         ),
                       ],

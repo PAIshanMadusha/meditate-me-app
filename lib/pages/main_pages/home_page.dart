@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:meditate_me_app/models/meditation_exercise_model.dart';
 import 'package:meditate_me_app/models/mindful_exercise_model.dart';
 import 'package:meditate_me_app/models/sleep_exercise_model.dart';
+import 'package:meditate_me_app/models/youtube_player_page_data.dart';
 import 'package:meditate_me_app/providers/filter_provider.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_constances.dart';
@@ -10,6 +13,151 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  //When MindfulExercise Pressed
+  void handleMindfulExercisePressed() {}
+
+  //When Meditation Exercise Pressed
+  void handleMeditationExercisePressed(
+    BuildContext context,
+    final name,
+    final category,
+    final description,
+    final duration,
+    final videoUrl,
+  ) {
+    showModalBottomSheet(
+      backgroundColor: AppColors.kWhiteColor,
+      // ignore: deprecated_member_use
+      barrierColor: AppColors.kWhiteColor.withOpacity(0.3),
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(
+              AppConstances.kPaddingValue,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      name,
+                      style: AppTextStyle.kTitleStyle,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppConstances.kSizedBoxValue,
+                ),
+                Text(
+                  category,
+                  style: AppTextStyle.kTitleStyle.copyWith(
+                    color: AppColors.kGreyColor,
+                  ),
+                ),
+                SizedBox(
+                  height: AppConstances.kSizedBoxValue,
+                ),
+                Text(
+                  description,
+                  style: AppTextStyle.kSmallDescriptionStyle,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: AppConstances.kSizedBoxValue,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.timelapse_sharp,
+                      size: 30,
+                      color: AppColors.kBlueColor,
+                    ),
+                    SizedBox(
+                      width: AppConstances.kSizedBoxValue - 5,
+                    ),
+                    Text(
+                      "${duration.toString()} Min",
+                      style: AppTextStyle.kTitleStyle.copyWith(
+                        color: AppColors.kBlueColor,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppConstances.kSizedBoxValue * 2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(
+                          AppColors.kBlueColor,
+                        ),
+                        shadowColor: WidgetStatePropertyAll(
+                          AppColors.kBlueColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        GoRouter.of(context).push(
+                          "/youtubePlayerPage",
+                          extra: YoutubePlayerPageData(
+                            title: name,
+                            category: category,
+                            description: description,
+                            duration: duration,
+                            url: videoUrl,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Start",
+                        style: AppTextStyle.kBodyStyle.copyWith(
+                          color: AppColors.kWhiteColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: AppConstances.kSizedBoxValue,
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(
+                          AppColors.kGreyColor,
+                        ),
+                        shadowColor: WidgetStatePropertyAll(
+                          AppColors.kGreyColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Close",
+                        style: AppTextStyle.kBodyStyle.copyWith(
+                          color: AppColors.kWhiteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  //When Sleep Exercise Pressed
+  void handleSleepExercisePressed() {}
 
   @override
   Widget build(BuildContext context) {
@@ -257,7 +405,22 @@ class HomePage extends StatelessWidget {
                             mainAxisSpacing: 10,
                             children: completedData.map((data) {
                               return GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  if (data is MindfulExerciseModel) {
+                                    handleMindfulExercisePressed();
+                                  } else if (data is MeditationExerciseModel) {
+                                    handleMeditationExercisePressed(
+                                      context,
+                                      data.name,
+                                      data.category,
+                                      data.description,
+                                      data.duration,
+                                      data.videoUrl,
+                                    );
+                                  } else {
+                                    handleSleepExercisePressed();
+                                  }
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(
