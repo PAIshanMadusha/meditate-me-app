@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meditate_me_app/models/meditation_exercise_model.dart';
@@ -5,6 +7,7 @@ import 'package:meditate_me_app/models/mindful_exercise_model.dart';
 import 'package:meditate_me_app/models/sleep_exercise_model.dart';
 import 'package:meditate_me_app/models/youtube_player_page_data.dart';
 import 'package:meditate_me_app/providers/filter_provider.dart';
+import 'package:meditate_me_app/router/route_names.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_constances.dart';
 import 'package:meditate_me_app/utils/app_text_style.dart';
@@ -15,7 +18,15 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   //When MindfulExercise Pressed
-  void handleMindfulExercisePressed() {}
+  void handleMindfulExercisePressed(
+    BuildContext context,
+    MindfulExerciseModel data,
+  ) {
+    GoRouter.of(context)
+        .pushNamed(RouteNames.mindfulExerciseTimerPage, queryParameters: {
+      "mindfulExercise": jsonEncode(data.toJson()),
+    });
+  }
 
   //When Meditation Exercise Pressed
   void handleMeditationExercisePressed(
@@ -407,7 +418,10 @@ class HomePage extends StatelessWidget {
                               return GestureDetector(
                                 onTap: () {
                                   if (data is MindfulExerciseModel) {
-                                    handleMindfulExercisePressed();
+                                    handleMindfulExercisePressed(
+                                      context,
+                                      data,
+                                    );
                                   } else if (data is MeditationExerciseModel) {
                                     handleMeditationExercisePressed(
                                       context,

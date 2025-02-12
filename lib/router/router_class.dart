@@ -5,6 +5,7 @@ import 'package:meditate_me_app/models/mindful_exercise_model.dart';
 import 'package:meditate_me_app/models/youtube_player_page_data.dart';
 import 'package:meditate_me_app/pages/main_page.dart';
 import 'package:meditate_me_app/pages/mindful_exercise_single_page.dart';
+import 'package:meditate_me_app/pages/mindful_exercise_timer_page.dart';
 import 'package:meditate_me_app/pages/youtube_player_page.dart';
 import 'package:meditate_me_app/router/route_names.dart';
 
@@ -36,8 +37,23 @@ class RouterClass {
         path: "/youtubePlayerPage",
         name: RouteNames.youtubePlayerPage,
         builder: (context, state) {
-          final YoutubePlayerPageData youtubePlayerPageData = state.extra as YoutubePlayerPageData;
-          return YoutubePlayerPage(youtubePlayerPageData: youtubePlayerPageData);
+          final YoutubePlayerPageData youtubePlayerPageData =
+              state.extra as YoutubePlayerPageData;
+          return YoutubePlayerPage(
+              youtubePlayerPageData: youtubePlayerPageData);
+        },
+      ),
+      GoRoute(
+        path: "/mindfulExerciseTimerPage",
+        name: RouteNames.mindfulExerciseTimerPage,
+        builder: (context, state) {
+          final mindfulExerciseJson =
+              state.uri.queryParameters["mindfulExercise"];
+          final mindfulExercise =
+              MindfulExerciseModel.fromJson(jsonDecode(mindfulExerciseJson!));
+          return MindfulExerciseTimerPage(
+            mindfulExerciseModel: mindfulExercise,
+          );
         },
       ),
     ],
