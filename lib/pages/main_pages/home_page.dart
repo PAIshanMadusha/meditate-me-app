@@ -168,7 +168,15 @@ class HomePage extends StatelessWidget {
   }
 
   //When Sleep Exercise Pressed
-  void handleSleepExercisePressed() {}
+  void handleSleepExercisePressed(
+      BuildContext context, SleepExerciseModel data) {
+    GoRouter.of(context).pushNamed(
+      RouteNames.sleepExerciseTimerPage,
+      queryParameters: {
+        "sleepExercise": jsonEncode(data.toJson()),
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -432,7 +440,10 @@ class HomePage extends StatelessWidget {
                                       data.videoUrl,
                                     );
                                   } else {
-                                    handleSleepExercisePressed();
+                                    handleSleepExercisePressed(
+                                      context,
+                                      data,
+                                    );
                                   }
                                 },
                                 child: Container(
@@ -443,8 +454,8 @@ class HomePage extends StatelessWidget {
                                     gradient: data is MindfulExerciseModel
                                         ? AppColors.kMindfulCardColor
                                         : data is SleepExerciseModel
-                                            ? AppColors.kMeditationCardColor
-                                            : AppColors.kSleepCardColor,
+                                            ? AppColors.kSleepCardColor
+                                            : AppColors.kMeditationCardColor,
                                     boxShadow: [
                                       BoxShadow(
                                         color: AppColors.kFChipContainerColor2

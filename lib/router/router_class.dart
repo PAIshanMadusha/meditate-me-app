@@ -1,11 +1,12 @@
 import 'dart:convert';
-
 import 'package:go_router/go_router.dart';
 import 'package:meditate_me_app/models/mindful_exercise_model.dart';
+import 'package:meditate_me_app/models/sleep_exercise_model.dart';
 import 'package:meditate_me_app/models/youtube_player_page_data.dart';
 import 'package:meditate_me_app/pages/main_page.dart';
 import 'package:meditate_me_app/pages/mindful_exercise_single_page.dart';
 import 'package:meditate_me_app/pages/mindful_exercise_timer_page.dart';
+import 'package:meditate_me_app/pages/sleep_exercise_timer_page.dart';
 import 'package:meditate_me_app/pages/youtube_player_page.dart';
 import 'package:meditate_me_app/router/route_names.dart';
 
@@ -53,6 +54,18 @@ class RouterClass {
               MindfulExerciseModel.fromJson(jsonDecode(mindfulExerciseJson!));
           return MindfulExerciseTimerPage(
             mindfulExerciseModel: mindfulExercise,
+          );
+        },
+      ),
+      GoRoute(
+        path: "/sleepExerciseTimerPage",
+        name: RouteNames.sleepExerciseTimerPage,
+        builder: (context, state) {
+          final sleepExerciseJson = state.uri.queryParameters["sleepExercise"];
+          final sleepExercise =
+              SleepExerciseModel.fromJson(jsonDecode(sleepExerciseJson!));
+          return SleepExerciseTimerPage(
+            sleepExerciseModel: sleepExercise,
           );
         },
       ),
