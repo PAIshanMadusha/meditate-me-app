@@ -16,13 +16,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   //BottomNavigationBar OnTap:
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   static const List<Widget> _pages = [
     HomePage(),
     MindfulExercisesPage(),
     CreateCustomExercisePage(),
-    CustomExercisesPage(),
+    CustomExercisePage(),
     ProfilePage(),
   ];
 
