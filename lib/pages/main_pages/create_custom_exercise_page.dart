@@ -3,6 +3,7 @@ import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_constances.dart';
 import 'package:meditate_me_app/utils/app_text_style.dart';
 import 'package:meditate_me_app/widgets/meditation_form.dart';
+import 'package:meditate_me_app/widgets/mindfulness_form.dart';
 import 'package:meditate_me_app/widgets/sleep_form.dart';
 
 class CreateCustomExercisePage extends StatefulWidget {
@@ -91,8 +92,12 @@ class _CreateCustomExercisePageState extends State<CreateCustomExercisePage> {
               SizedBox(
                 height: AppConstances.kSizedBoxValue * 2,
               ),
-              MeditationForm(),
-              SleepForm(),
+              if (typeOfContent == "Meditation")
+                MeditationForm()
+              else if (typeOfContent == "Mindfulness")
+                MindfulnessForm()
+              else
+                SleepForm(),
             ],
           ),
         ),
