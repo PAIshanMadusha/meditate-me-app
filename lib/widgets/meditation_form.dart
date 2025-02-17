@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:meditate_me_app/models/meditation_exercise_model.dart';
+import 'package:meditate_me_app/providers/custom_data_provider.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_constances.dart';
 import 'package:meditate_me_app/utils/app_text_style.dart';
 import 'package:meditate_me_app/widgets/reusable/custom_text_input_feild.dart';
+import 'package:provider/provider.dart';
 
 class MeditationForm extends StatefulWidget {
   const MeditationForm({super.key});
@@ -151,7 +154,34 @@ class _MeditationFormState extends State<MeditationForm> {
                         AppColors.kMindfulCardColor1,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+
+                        //Create a New Meditation From the User Data
+                        final meditation = MeditationExerciseModel(
+                          category: _category,
+                          name: _name,
+                          description: _description,
+                          duration: _duration,
+                          audioUrl: _audioUrl,
+                          videoUrl: _videoUrl,
+                        );
+
+                        //Clear the Fields
+                        _formKey.currentState!.reset();
+                        _category = "";
+                        _name = "";
+                        _description = "";
+                        _duration = 0;
+                        _audioUrl = "";
+                        _videoUrl = "";
+
+                        //Add the Meditation through the Provider
+                        Provider.of<CustomDataProvider>(context, listen: false)
+                            .addMeditation(meditation, context);
+                      }
+                    },
                     child: Text(
                       "Submit",
                       style: AppTextStyle.kBodyStyle.copyWith(
