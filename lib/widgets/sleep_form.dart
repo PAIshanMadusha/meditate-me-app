@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:meditate_me_app/models/sleep_exercise_model.dart';
+import 'package:meditate_me_app/providers/custom_data_provider.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_constances.dart';
 import 'package:meditate_me_app/utils/app_text_style.dart';
 import 'package:meditate_me_app/widgets/reusable/custom_text_input_feild.dart';
+import 'package:provider/provider.dart';
 
 class SleepForm extends StatefulWidget {
   const SleepForm({super.key});
@@ -133,7 +136,30 @@ class _SleepFormState extends State<SleepForm> {
                         AppColors.kMindfulCardColor1,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+
+                        final sleepExercise = SleepExerciseModel(
+                          category: _category,
+                          name: _name,
+                          description: _description,
+                          duration: _duration,
+                          audioUrl: _audioUrl,
+                        );
+
+                        //Clear the Fields
+                        _formKey.currentState!.reset();
+                        _category = "";
+                        _name = "";
+                        _description = "";
+                        _duration = 0;
+                        _audioUrl = "";
+
+                        Provider.of<CustomDataProvider>(context, listen: false)
+                            .addSleepExercise(sleepExercise, context);
+                      }
+                    },
                     child: Text(
                       "Submit",
                       style: AppTextStyle.kBodyStyle.copyWith(
