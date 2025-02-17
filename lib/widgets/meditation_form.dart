@@ -158,7 +158,7 @@ class _MeditationFormState extends State<MeditationForm> {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
 
-                        //Create a New Meditation From the User Data
+                        //User Data
                         final meditation = MeditationExerciseModel(
                           category: _category,
                           name: _name,

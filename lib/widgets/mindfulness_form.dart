@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meditate_me_app/models/mindful_exercise_model.dart';
+import 'package:meditate_me_app/providers/custom_data_provider.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_constances.dart';
 import 'package:meditate_me_app/utils/app_text_style.dart';
 import 'package:meditate_me_app/widgets/reusable/custom_text_input_feild.dart';
+import 'package:provider/provider.dart';
 
 class MindfulnessForm extends StatefulWidget {
   const MindfulnessForm({super.key});
@@ -237,7 +240,36 @@ class _MindfulnessFormState extends State<MindfulnessForm> {
                       AppColors.kBlueColor,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+
+                      final imagePathString = _imagePath?.path ?? "";
+                      //User Data
+                      final mindfulExercise = MindfulExerciseModel(
+                        category: _cateogry,
+                        name: _name,
+                        description: _description,
+                        instructions: _instructions,
+                        duration: _duration,
+                        instructionsUrl: _instructionsUrl,
+                        imagePath: imagePathString,
+                      );
+
+                      //Clear the Fields
+                      _formKey.currentState!.reset();
+                      _cateogry = "";
+                      _name = "";
+                      _description = "";
+                      _instructions = [];
+                      _duration = 0;
+                      _instructionsUrl = "";
+                      _imagePath = null;
+
+                      Provider.of<CustomDataProvider>(context, listen: false)
+                          .addMindfulExercise(mindfulExercise, context);
+                    }
+                  },
                   child: Text(
                     "Submit",
                     style: AppTextStyle.kBodyStyle.copyWith(

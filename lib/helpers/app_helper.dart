@@ -14,7 +14,7 @@ class AppHelper {
             fontSize: 14,
           ),
         ),
-        duration: Duration(seconds: 10),
+        duration: Duration(seconds: 1),
       ),
     );
   }
