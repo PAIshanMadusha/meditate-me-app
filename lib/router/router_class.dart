@@ -4,6 +4,7 @@ import 'package:meditate_me_app/models/mindful_exercise_model.dart';
 import 'package:meditate_me_app/models/sleep_exercise_model.dart';
 import 'package:meditate_me_app/models/youtube_player_page_data.dart';
 import 'package:meditate_me_app/pages/main_page.dart';
+import 'package:meditate_me_app/pages/main_pages/create_custom_exercise_page.dart';
 import 'package:meditate_me_app/pages/mindful_exercise_single_page.dart';
 import 'package:meditate_me_app/pages/mindful_exercise_timer_page.dart';
 import 'package:meditate_me_app/pages/sleep_exercise_timer_page.dart';
@@ -67,6 +68,13 @@ class RouterClass {
           return SleepExerciseTimerPage(
             sleepExerciseModel: sleepExercise,
           );
+        },
+      ),
+      GoRoute(
+        path: "/createPage",
+        name: RouteNames.createPage,
+        builder: (context, state) {
+          return const CreateCustomExercisePage();
         },
       ),
     ],

@@ -4,4 +4,5 @@ class RouteNames {
   static const String youtubePlayerPage = "/youtubePlayerPage";
   static const String mindfulExerciseTimerPage = "/mindfulExerciseTimerPage";
   static const String sleepExerciseTimerPage = "/sleepExerciseTimerPage";
+  static const String createPage = "/createPage";
 }

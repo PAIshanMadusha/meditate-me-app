@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
 import 'package:meditate_me_app/utils/app_text_style.dart';
 import 'package:meditate_me_app/widgets/tabs/meditation_exercise_tab.dart';
@@ -49,6 +50,18 @@ class CustomExercisePage extends StatelessWidget {
                 text: "Sleep",
               ),
             ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          // ignore: deprecated_member_use
+          backgroundColor: AppColors.kBlueColor.withOpacity(0.8),
+          onPressed: () {
+            GoRouter.of(context).push("/createPage");
+          },
+          child: Icon(
+            Icons.add,
+            color: AppColors.kWhiteColor,
+            size: 34,
           ),
         ),
         body: const TabBarView(
