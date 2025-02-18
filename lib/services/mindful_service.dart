@@ -25,4 +25,40 @@ class MindfulService {
       }
     }
   }
+
+  //Get All MindfulExercises
+  List<MindfulExerciseModel> getMindfulExercises() {
+    try {
+      final allMindfulExercises = mindfulBox.get("mindful_data");
+
+      if (allMindfulExercises != null && allMindfulExercises is List<dynamic>) {
+        return allMindfulExercises.cast<MindfulExerciseModel>().toList();
+      } else {
+        return [];
+      }
+    } catch (error) {
+      error.toString();
+      return [];
+    }
+  }
+
+  //Delete a MindfulExercise
+  Future<void> deleteMindfulExercise(
+      MindfulExerciseModel mindfulExercise, BuildContext context) async {
+    try {
+      final allMindfulExercises = mindfulBox.get("mindful_data");
+      allMindfulExercises.remove(mindfulExercise);
+
+      await mindfulBox.put("mindful_data", allMindfulExercises);
+
+      if (context.mounted) {
+        AppHelper.showSnackBar(
+            context, "MindfulExercise Deleted Successfully!");
+      }
+    } catch (error) {
+      if (context.mounted) {
+        AppHelper.showSnackBar(context, "Error: $error");
+      }
+    }
+  }
 }
