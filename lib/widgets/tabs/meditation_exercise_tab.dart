@@ -103,6 +103,9 @@ class MeditationExerciseTab extends StatelessWidget {
                             color: AppColors.kWhiteColor,
                           ),
                         ),
+                        SizedBox(
+                          height: AppConstances.kSizedBoxValue,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
