@@ -17,7 +17,7 @@ class MindfulExerciseSinglePage extends StatelessWidget {
     if(await canLaunchUrl(uri)){
       await launchUrl(uri);
     }else{
-      throw "Could not Lanch $url";
+      throw "Could not Launch $url";
     }
   }
 

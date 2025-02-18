@@ -8,6 +8,7 @@ class AppColors {
   static const Color kLightBlueColor = Color.fromARGB(255, 140, 255, 236);
   static const Color kBrownColor = Colors.brown;
   static const Color kMainTitleColor = Color(0xff1D1616);
+  static const Color kRedColor = Colors.redAccent;
 
   //Filter Chip Container
   static const Color kFChipContainerColor1 = Color(0xffFCC6FF);
