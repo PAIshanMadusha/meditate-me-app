@@ -104,7 +104,7 @@ class CustomDataProvider extends ChangeNotifier {
   }
 
   //Get all SleepExercises
-  List<SleepExerciseModel> allSleepExercises() {
+  List<SleepExerciseModel> getSleepExercises() {
     try {
       final List<SleepExerciseModel> allSleepExercises =
           SleepService().getSleepExercises();

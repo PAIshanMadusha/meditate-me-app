@@ -53,7 +53,8 @@ class MindfulExerciseTab extends StatelessWidget {
                         gradient: AppColors.kMindfulCardColor,
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.kMindfulCardColor1,
+                            // ignore: deprecated_member_use
+                            color: AppColors.kMindfulCardColor1.withOpacity(0.7),
                             spreadRadius: 1,
                             blurRadius: 1,
                             offset: Offset(1, 1),
@@ -129,7 +130,7 @@ class MindfulExerciseTab extends StatelessWidget {
                                   Icon(
                                     Icons.integration_instructions_sharp,
                                     size: 20,
-                                    color: AppColors.kFChipContainerColor1,
+                                    color: AppColors.kSleepCardColor1,
                                   ),
                                   SizedBox(
                                     width: AppConstances.kSizedBoxValue,
