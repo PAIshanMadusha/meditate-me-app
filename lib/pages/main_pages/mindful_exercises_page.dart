@@ -20,7 +20,7 @@ class MindfulExercisesPage extends StatelessWidget {
         title: Text(
           "Mindful Exercises",
           style: AppTextStyle.kMainTitleStyle.copyWith(
-            fontSize: 26,
+            fontSize: 22,
           ),
         ),
         centerTitle: true,
@@ -39,11 +39,11 @@ class MindfulExercisesPage extends StatelessWidget {
                     size: 30,
                   ),
                   // ignore: deprecated_member_use
-                  prefixIconColor: AppColors.kMainTitleColor.withOpacity(0.1),
+                  prefixIconColor: AppColors.kMainTitleColor.withOpacity(0.2),
                   hintText: "Search",
                   hintStyle: AppTextStyle.kTitleStyle.copyWith(
                     // ignore: deprecated_member_use
-                    color: AppColors.kBlackColor.withOpacity(0.1),
+                    color: AppColors.kBlackColor.withOpacity(0.2),
                   ),
                   fillColor: AppColors.kFChipContainerColor1,
                   filled: true,

@@ -64,8 +64,10 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Profile",
-          style: AppTextStyle.kMainTitleStyle.copyWith(),
+          "Your Profile",
+          style: AppTextStyle.kMainTitleStyle.copyWith(
+            fontSize: 22,
+          ),
         ),
         centerTitle: true,
       ),
@@ -82,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     shape: BoxShape.circle,
                     border: Border.all(
                       // ignore: deprecated_member_use
-                      color: AppColors.kBlueColor.withOpacity(0.6),
+                      color: AppColors.kGreyColor.withOpacity(0.8),
                       width: 3,
                     ),
                   ),
@@ -143,7 +145,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(
-                    AppColors.kMainTitleColor,
+                    AppColors.kBlueColor,
+                  ),
+                  shadowColor: WidgetStatePropertyAll(
+                    AppColors.kBlackColor,
                   ),
                 ),
                 onPressed: _saveUserName,
@@ -159,7 +164,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Text(
                 "Here are Your Custom Exercises",
-                style: AppTextStyle.kTitleStyle,
+                style: AppTextStyle.kTitleStyle.copyWith(
+                  color: AppColors.kBlackColor,
+                  fontSize: 21,
+                ),
               ),
               SizedBox(
                 height: AppConstances.kSizedBoxValue,
@@ -203,7 +211,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildExerciseTitle(String title) {
     return Text(
       title,
-      style: AppTextStyle.kTitleStyle,
+      style: AppTextStyle.kTitleStyle.copyWith(
+        color: AppColors.kBlueColor,
+      ),
     );
   }
 
@@ -214,15 +224,42 @@ class _ProfilePageState extends State<ProfilePage> {
     required duration,
   }) {
     return Container(
-      decoration: BoxDecoration(),
+      margin: EdgeInsets.only(
+        bottom: AppConstances.kPaddingValue,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          15,
+        ),
+        gradient: AppColors.kFChipContainerColor,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.kFChipContainerColor1,
+            blurRadius: 1,
+            spreadRadius: 1,
+            offset: Offset(1, 1),
+          ),
+        ],
+      ),
       child: ListTile(
-        title: Text(title),
+        title: Text(
+          title,
+          style: AppTextStyle.kTitleStyle.copyWith(
+            fontSize: 18,
+          ),
+        ),
         subtitle: Text(
           description,
+          style: AppTextStyle.kSmallDescriptionStyle,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: Text("$duration Min"),
+        trailing: Text(
+          "$duration Min",
+          style: AppTextStyle.kBodyStyle.copyWith(
+            color: AppColors.kGreyColor,
+          ),
+        ),
       ),
     );
   }
@@ -230,7 +267,13 @@ class _ProfilePageState extends State<ProfilePage> {
   //Exercises
   Widget _buildMeditationsList(List<MeditationExerciseModel> data) {
     if (data.isEmpty) {
-      return Text("No Meditations are Created!");
+      return Text(
+        "No Meditations are Created!",
+        style: AppTextStyle.kBodyStyle.copyWith(
+          color: AppColors.kGreyColor,
+        ),
+        textAlign: TextAlign.center,
+      );
     } else {
       return Column(
         children: data.map((meditation) {
@@ -246,7 +289,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildMindfulExercisesList(List<MindfulExerciseModel> data) {
     if (data.isEmpty) {
-      return Text("No Mindful Exercises are Created!");
+      return Text(
+        "No Mindful Exercises are Created!",
+        style: AppTextStyle.kBodyStyle.copyWith(
+          color: AppColors.kGreyColor,
+        ),
+        textAlign: TextAlign.center,
+      );
     } else {
       return Column(
         children: data.map((mindful) {
@@ -262,7 +311,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildSleepExercisesList(List<SleepExerciseModel> data) {
     if (data.isEmpty) {
-      return Text("No Sleep Exercises are Created!");
+      return Text(
+        "No Sleep Exercises are Created!",
+        style: AppTextStyle.kBodyStyle.copyWith(
+          color: AppColors.kGreyColor,
+        ),
+        textAlign: TextAlign.center,
+      );
     } else {
       return Column(
         children: data.map((sleep) {

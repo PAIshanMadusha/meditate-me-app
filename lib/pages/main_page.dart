@@ -6,6 +6,7 @@ import 'package:meditate_me_app/pages/main_pages/home_page.dart';
 import 'package:meditate_me_app/pages/main_pages/mindful_exercises_page.dart';
 import 'package:meditate_me_app/pages/main_pages/profile_page.dart';
 import 'package:meditate_me_app/utils/app_colors.dart';
+import 'package:meditate_me_app/utils/app_text_style.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,7 +17,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   //BottomNavigationBar OnTap:
-  int _selectedIndex = 4;
+  int _selectedIndex = 0;
 
   static const List<Widget> _pages = [
     HomePage(),
@@ -39,6 +40,11 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: BottomNavigationBar(
+          selectedLabelStyle: AppTextStyle.kBodyStyle.copyWith(
+            color: AppColors.kBlueColor,
+            fontWeight: FontWeight.w800,
+            fontSize: 17,
+          ),
           onTap: _onItemTapped,
           currentIndex: _selectedIndex,
           items: [

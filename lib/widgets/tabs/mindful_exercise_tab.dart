@@ -63,22 +63,6 @@ class MindfulExerciseTab extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              40,
-                            ),
-                            child: mindfulExercise.imagePath == ""
-                                ? SizedBox()
-                                : Image.asset(
-                                    mindfulExercise.imagePath,
-                                    height: 150,
-                                    width: 150,
-                                    fit: BoxFit.cover,
-                                  ),
-                          ),
-                          SizedBox(
-                            height: AppConstances.kSizedBoxValue,
-                          ),
                           Text(
                             mindfulExercise.name,
                             style: AppTextStyle.kTitleStyle.copyWith(

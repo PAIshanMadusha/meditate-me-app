@@ -44,7 +44,7 @@ class CustomTextInputFeild extends StatelessWidget {
             20,
           ),
           borderSide: BorderSide(
-            color: AppColors.kFChipContainerColor1,
+            color: AppColors.kWhiteColor,
             width: 2,
           )
         ),
