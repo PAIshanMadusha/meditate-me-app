@@ -16,7 +16,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   //BottomNavigationBar OnTap:
-  int _selectedIndex = 3;
+  int _selectedIndex = 4;
 
   static const List<Widget> _pages = [
     HomePage(),
